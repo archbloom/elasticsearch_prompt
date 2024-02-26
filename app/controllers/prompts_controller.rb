@@ -1,4 +1,4 @@
-class UserPromptsController < ApplicationController
+class PromptsController < ApplicationController
 
   def search
     if params[:text]

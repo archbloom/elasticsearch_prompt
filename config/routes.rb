@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/user_prompts/search', to: 'user_prompts#search'
+  get '/prompts/search', to: 'prompts#search'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "user_prompts#search"
+  root "prompts#search"
 end

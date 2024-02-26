@@ -16,7 +16,7 @@ The database and elastic container is also not password protected.
 *Production* setup is not done.
 
 # Test suit
-Rspec or any test suit has not et added.
+Rspec or any test suit has not yet added.
 
 # Application setup:
 To run the application, the system should have docker installed.
@@ -28,17 +28,17 @@ To run the application, the system should have docker installed.
   `$ rails db:setup` and optional `$ rails db:migrate`
 4. To populate the elasticsearch's index  
   `$ rails db:seed`  
-  This will pull up data from the dataset and will create index named user_prompts in elasticsearch.
+  This will pull up data from the dataset and will create index named `user_prompts` in elasticsearch.
 
 # About postgres setup
-Postgres has mapped 5434 port to 5432 port of postgres container.  
+Postgres has mapped `5434` port to `5432` port of postgres container.  
 This is currently an unprotected database without username and password.  
 
 ## Database Design  
 One table name `user_prompts` this will store the search history.
 
 # About elastic search
-Elastic has mapped 9201 port to 9200 port of elasticsearch container.  
+Elastic has mapped `9201` port to `9200` port of elasticsearch container.  
 This is currently an unprotected database without username and password. 
 
 ## Elasticsearch index format

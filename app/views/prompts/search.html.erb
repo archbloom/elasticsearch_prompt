@@ -1,5 +1,5 @@
 <h1>Search Prompts</h1>
-<%= form_tag user_prompts_search_path, method: :get, id: 'search-form' do %>
+<%= form_tag prompts_search_path, method: :get, id: 'search-form' do %>
   <%= text_field_tag :text, params[:text], placeholder: "Enter search terms" %>
   <%= submit_tag "Search" %>
 <% end %>
