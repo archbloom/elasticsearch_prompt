@@ -22,24 +22,34 @@ Rspec or any test suit has not yet added.
 To run the application, the system should have docker installed.
 1. To run the postgres and elasticsearch container  
   `$ docker compose up`
-2. To run the application  
+2. To run the application, rails application will run outside the container  
   `$ rails s`
 3. For postgres database setup, to create DB in the postgres  
   `$ rails db:setup` and optional `$ rails db:migrate`
 4. To populate the elasticsearch's index  
   `$ rails db:seed`  
-  This will pull up data from the dataset and will create index named `user_prompts` in elasticsearch.
+  This will pull up data from the dataset of *huggingface* and will create index named `user_prompts` in elasticsearch and will dump data into the created index.  
 
 # About postgres setup
 Postgres has mapped `5434` port to `5432` port of postgres container.  
 This is currently an unprotected database without username and password.  
 
 ## Database Design  
-One table name `user_prompts` this will store the search history.
+One table name `user_prompts` this will store the search history.  
+`UserPrompt(id: integer, text: string, created_at: datetime, updated_at: datetime)`
 
-# About elastic search
+# About elasticsearch setup
 Elastic has mapped `9201` port to `9200` port of elasticsearch container.  
 This is currently an unprotected database without username and password. 
+
+Gems for the elasticsearch
+```  
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+```
+
+'UserPrompt' is model mapped to search the query to elasticsearch index.  
+'UserPrompt' will also save the query to the postgresql table(db name: elastic_prompt_development).  
 
 ## Elasticsearch index format
 ```   
