@@ -7,6 +7,33 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# data we will recieve from the url
+# {
+#   "rows": [
+#     {
+#       "row_idx": 0,
+#       "row": {
+#         "Prompt": "realistic car 3 d render sci - fi car and sci - fi robotic factory structure in the coronation of napoleon painting and digital billboard with point cloud in the middle, unreal engine 5, keyshot, octane, artstation trending, ultra high detail, ultra realistic, cinematic, 8 k, 1 6 k, in style of zaha hadid, in style of nanospace michael menzelincev, in style of lee souder, in plastic, dark atmosphere, tilt shift, depth of field,"
+#       },
+#       "truncated_cells": []
+#     }
+#   ]
+# }
+
+# data we will put in the elasticsearch model in this format
+# {
+#   "_index": "user_prompts",
+#   "_id": "0",
+#   "_version": 1,
+#   "_seq_no": 0,
+#   "_primary_term": 1,
+#   "found": true,
+#   "_source": {
+#     "prompt": "realistic car 3 d render sci - fi car and sci - fi robotic factory structure in the coronation of napoleon painting and digital billboard with point cloud in the middle, unreal engine 5, keyshot, octane, artstation trending, ultra high detail, ultra realistic, cinematic, 8 k, 1 6 k, in style of zaha hadid, in style of nanospace michael menzelincev, in style of lee souder, in plastic, dark atmosphere, tilt shift, depth of field,"
+#   }
+# }
+
 require 'uri'
 require 'net/http'
 require 'json'
@@ -33,8 +60,3 @@ json_reponse = JSON.parse(response.body)
 json_reponse['rows'].each do |row|
   index_document(row['row_idx'], { prompt: row['row']['Prompt'] })
 end
-
-
-# curl -X PUT --header 'Content-Type: application/json' 'http://localhost:9200/hello/_doc/1' -d '{ "prompt" => "sample data in the text field" }'
-
-# curl -X PUT "localhost:9200/user_prompts?pretty"
