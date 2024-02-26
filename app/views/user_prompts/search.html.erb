@@ -1,0 +1,19 @@
+<h1>Search Prompts</h1>
+<%= form_tag user_prompts_search_path, method: :get, id: 'search-form' do %>
+  <%= text_field_tag :text, params[:text], placeholder: "Enter search terms" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<h1>Results:</h1>
+<% @prompts&.each do |prompt| %>
+  <p>Search: <i><%= prompt._index %></i></p>
+  <p>Score: <i><%= prompt._score %></i></p>
+  <p>Id: <i><%= prompt._id %></i></p>
+  <p>Content: <i><%= prompt._source['prompt'] %></i></p>
+  <hr>
+<% end %>
+
+<h1>Last Five Search Queries:</h1>
+<% @searches&.each do |search| %>
+  <p>Search query: <i><%= search.text %></i></p>
+<% end %>

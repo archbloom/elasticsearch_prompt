@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    command: ["postgres", "-c", "log_statement=all"]
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    image: postgres:12
+    container_name: elastic-postgres
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_DB: elastic_prompt_development
+      POSTGRES_USER: postgres
+      # POSTGRES_PASSWORD: postgres
+      # POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - backend
+    
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+    container_name: elastic-search
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms1g -Xmx2g"
+      - "xpack.security.http.ssl.enabled=false"
+      - "xpack.security.enabled=false"
+    ports:
+      - "9201:9200"
+      - "9301:9300"
+    networks:
+      - backend
+  # web:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/app
+  #   depends_on:
+  #     - db
+  #     - elasticsearch
+  #   environment:
+  #     RAILS_ENV: development
+  #     DATABASE_URL: postgres://postgres@db:5432/elastic_prompt_development
+  #   networks:
+  #     - backend
+
+networks:
+  backend:
+    driver: bridge
