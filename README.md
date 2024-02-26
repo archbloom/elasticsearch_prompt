@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple application for searching any prompt and seach the promot in the elastice search index.
 
-Things you may want to cover:
-
-* Ruby version
+* Version
+Ruby - 3.0.0
+Rails - 7.1.3
 
 * System dependencies
+Postgres official image: postgres:12
+Elasticseach image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
 
 * Configuration
+Currently the system does not have any password protection.
+The database and elastic container is also not password protected.
+*Production* setup is not done.
 
-* Database creation
+* Initial setup to porpulate the elastic search index
+rails db:seed
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Test suit
+Rspec or any test suit has not et added.
